@@ -1,0 +1,309 @@
+/* ... [KEEP ALL PREVIOUS CSS AS IS] ... */
+
+/* --- ADD THIS TO THE BOTTOM OF style.css --- */
+
+/* WELCOME MODAL STYLES */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark background behind modal */
+    backdrop-filter: blur(8px);
+    z-index: 1000; /* Must be on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(255, 255, 255, 1);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 90%;
+    width: 350px;
+    transform: scale(0.5);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 50px rgba(255, 105, 180, 0.4); /* Pink Glow */
+}
+
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+/* Modal Text Styling */
+.modal-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: bounce 1s infinite;
+}
+
+.modal-content h1 {
+    font-family: 'Comfortaa', cursive;
+    color: #ff6b81; /* Cute Pink */
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.modal-content p {
+    font-family: 'Quicksand', sans-serif;
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+.modal-btn {
+    background: linear-gradient(135deg, #ff9a9e, #fecfef);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+    transition: transform 0.2s;
+}
+
+.modal-btn:hover {
+    transform: scale(1.1);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ... [Previous CSS Variables & Body Styles remain the same] ... */
+
+/* COPY AND REPLACE THE "BOOM" SECTION WITH THIS: */
+
+/* --- CENTRAL BOOM CONTAINER --- */
+.boom-container {
+    position: relative; 
+    height: 100px; /* Increased height for the logo */
+    width: 100px;
+    margin: 0 auto 15px auto; /* Center it */
+    display: flex; justify-content: center; align-items: center;
+    z-index: 5; 
+    transform-style: preserve-3d;
+    transform: translateZ(30px);
+}
+
+/* 1. The Channel Logo Style */
+.channel-logo {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: absolute; /* Stacked on top of emoji */
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+}
+
+/* 2. The Hidden Emoji Style */
+.reaction-emoji {
+    font-size: 3.5rem;
+    position: absolute;
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 15px var(--accent-color));
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- SWAP STATES --- */
+
+/* When "swapped" class is added (on hover): Logo hides, Emoji shows */
+.boom-container.swapped .channel-logo {
+    opacity: 0;
+    transform: scale(0) rotate(45deg);
+}
+
+.boom-container.swapped .reaction-emoji {
+    opacity: 1;
+    transform: scale(1.2) rotate(0deg);
+}
+
+/* Boom Effect (Clicking) */
+.boom-container.boom-active .channel-logo { 
+    animation: logoBounce 0.4s ease-out forwards; 
+}
+
+@keyframes logoBounce { 
+    0% { transform: scale(1); } 
+    40% { transform: scale(1.4); border-color: var(--accent-color); box-shadow: 0 0 40px var(--accent-color); } 
+    100% { transform: scale(1); } 
+}
+
+/* ... [Rest of the CSS remains the same] ... */
+
+/* Make sure you include the rest of your CSS file here (Links, Footer, etc.) */
+/* Just pasting the full CSS file again for safety so you don't lose anything */
+
+:root {
+    --bg-gradient: linear-gradient(135deg, #24243e, #302b63, #0f0c29);
+    --glass-bg: rgba(20, 20, 30, 0.4); 
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-color: #e0e0e0;
+    --accent-color: #ffd700;
+    --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    --btn-bg: rgba(255, 255, 255, 0.05);
+    --btn-hover: rgba(255, 255, 255, 0.15);
+    --particle-color: #a29bfe;
+    --icon-color: #e0e0e0;
+}
+
+body.light-mode {
+    --bg-gradient: linear-gradient(135deg, #89f7fe, #66a6ff);
+    --glass-bg: rgba(255, 255, 255, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --text-color: #2d3436;
+    --accent-color: #ff6b6b;
+    --card-shadow: 0 15px 35px rgba(0, 100, 200, 0.1);
+    --btn-bg: rgba(255, 255, 255, 0.4);
+    --btn-hover: rgba(255, 255, 255, 0.7);
+    --particle-color: #ffffff;
+    --icon-color: #2d3436;
+}
+
+body.theme-youtube {
+    --bg-gradient: linear-gradient(135deg, #ee9ca7, #ffdde1);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --text-color: #5e2a2a;
+    --accent-color: #d63031;
+    --icon-color: #d63031;
+    --particle-color: #fff;
+}
+
+body.theme-instagram {
+    --bg-gradient: linear-gradient(135deg, #cd93ff, #8e44ad, #24243e);
+    --glass-bg: rgba(30, 10, 40, 0.5);
+    --text-color: #f3e5f5;
+    --accent-color: #ff9f43;
+    --icon-color: #f3e5f5;
+    --particle-color: #e056fd;
+}
+
+body.theme-whatsapp {
+    --bg-gradient: linear-gradient(135deg, #1d976c, #93f9b9);
+    --glass-bg: rgba(20, 50, 30, 0.4);
+    --text-color: #e8f5e9;
+    --accent-color: #55efc4;
+    --icon-color: #e8f5e9;
+    --particle-color: #55efc4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+    font-family: 'Quicksand', sans-serif;
+    min-height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden; 
+    color: var(--text-color); 
+    transition: background 0.8s ease, color 0.8s ease;
+    cursor: url('data:image/svg+xml;utf8,<svg id="svg" xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="white"><circle cx="10" cy="10" r="5" opacity="0.8"/></svg>') 10 10, auto; 
+}
+
+@keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+.overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 2; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+#particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
+.card-container {
+    perspective: 1200px; 
+    z-index: 10;
+}
+
+.card {
+    background: var(--glass-bg); 
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border); 
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.05), var(--card-shadow);
+    border-radius: 24px; padding: 45px 35px;
+    width: 380px; max-width: 90vw; 
+    text-align: center; 
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+}
+
+.theme-switch {
+    position: absolute; top: 20px; right: 20px; 
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    border-radius: 50%; width: 45px; height: 45px; 
+    color: var(--text-color); font-size: 1.2rem; cursor: pointer;
+    z-index: 20; display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease; backdrop-filter: blur(10px);
+}
+.theme-switch:hover { transform: rotate(180deg); background: var(--btn-hover); }
+
+.title-header { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 5px; transform: translateZ(20px); }
+h1 { 
+    font-family: 'Comfortaa', cursive; 
+    font-size: 1.9rem; font-weight: 700; 
+    transition: color 0.5s ease; text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+    font-size: 1rem; opacity: 0.8; margin-bottom: 30px; font-weight: 600; height: 25px;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.2s ease, transform 0.2s ease, color 0.5s ease;
+    transform: translateZ(15px);
+}
+
+.links { display: flex; flex-direction: column; gap: 15px; transform: translateZ(25px); }
+
+.link-item {
+    display: flex; align-items: center; justify-content: space-between; padding: 18px 22px;
+    background: var(--btn-bg); 
+    border: 1px solid var(--glass-border); 
+    border-radius: 16px; text-decoration: none; color: var(--text-color);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative; overflow: hidden; user-select: none;
+}
+.link-left { display: flex; align-items: center; gap: 15px; font-weight: 600; }
+.link-icon { font-size: 1.4rem; transition: color 0.3s ease; color: var(--icon-color); }
+.arrow { opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; color: var(--icon-color); }
+
+.link-item:hover { 
+    background: var(--btn-hover); 
+    transform: translateY(-3px) scale(1.02); 
+    border-color: var(--accent-color); 
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); 
+}
+.link-item:hover .arrow { opacity: 1; transform: translateX(0); color: var(--accent-color); }
+
+.footer { margin-top: 35px; font-size: 0.8rem; opacity: 0.6; font-weight: 500; transform: translateZ(10px); }
+
+.side-sparkle { font-size: 1.8rem; animation: subtleFloat 3s ease-in-out infinite; filter: drop-shadow(0 0 5px var(--particle-color)); transition: filter 0.5s ease; }
+.side-sparkle:last-child { animation-delay: 1.5s; }
+@keyframes subtleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+.animate-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; } .delay-5 { animation-delay: 0.5s; }
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+span.ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple 600ms linear; background-color: rgba(255, 255, 255, 0.3); }
+@keyframes ripple { to { transform: scale(4); opacity: 0; } }
